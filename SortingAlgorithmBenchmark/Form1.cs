@@ -17,12 +17,17 @@ namespace SortingAlgorithmBenchmark
             cmbNumarElemente.SelectedIndex = 0;
         }
 
-        private void BtnStart_Click(object sender, EventArgs e)
+        private async void BtnStart_Click(object sender, EventArgs e)
         {
             panelGrafic.Controls.Clear();
+
+            btnStart.Enabled = false;
+            btnStart.Text = "Se ruleaza...";
             if (!int.TryParse(cmbNumarElemente.Text, out int numarElemente))
             {
                 MessageBox.Show("Te rog selecteaza un numar valid!");
+                btnStart.Enabled = true;
+                btnStart.Text = "Start Test";
                 return;
             }
             int[] dateInitiale = GenerareDateRandom(numarElemente);
@@ -54,15 +59,18 @@ namespace SortingAlgorithmBenchmark
 
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
-                alg.Sorteaza(dateDeSortat);
+                await Task.Run(() => alg.Sorteaza(dateDeSortat));
                 sw.Stop();
 
                 long timpMilisecunde = sw.ElapsedMilliseconds;
                 AdaugaBaraGrafic(alg.Nume, timpMilisecunde, pozitieY, culori[indexCuloare % culori.Length]);
                 pozitieY += 70;
                 indexCuloare++;
-                if (indexCuloare >= culori.Length) indexCuloare = 0;
             }
+
+            btnStart.Enabled = true;
+            btnStart.Text = "Start Test";
+            MessageBox.Show("Testare finalizata!");
         }
 
         private void AdaugaBaraGrafic(string numeAlgoritm, long timp, int y, Color culoareBara)

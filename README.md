@@ -32,6 +32,10 @@ The application compares 6 algorithms categorized by their theoretical time comp
 * **IDE:** Visual Studio 2026
 * **Design Pattern:** The application is highly extensible. All algorithms implement a common `ISortingAlgorithm` interface. This adheres to the **Open/Closed Principle (SOLID)**, allowing new sorting algorithms to be added without modifying the core UI logic.
 
+## Application Demo
+<img width="1043" height="637" alt="image" src="https://github.com/user-attachments/assets/d6ee382b-c2b8-4c8d-b99d-99b0ce4b231f" />
+
+
 ## How to Run Locally
 
 1. Ensure you have **Visual Studio 2022/2026** installed with the *.NET Desktop Development* workload.
